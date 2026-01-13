@@ -1,0 +1,20 @@
+services:
+  - type: web
+    name: car-ecommerce-api
+    env: go
+    buildCommand: go build -o main .
+    startCommand: ./main
+    envVars:
+      - key: JWT_SECRET
+        generateValue: true
+      - key: DB_NAME
+        value: car_ecommerce
+      - key: MONGODB_URI
+        fromDatabase:
+          name: mongodb
+          property: connectionString
+
+databases:
+  - name: mongodb
+    databaseName: car_ecommerce
+    user: admin
